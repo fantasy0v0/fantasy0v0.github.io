@@ -6,7 +6,8 @@ import Gitalk from "gitalk";
 export default {
   extends: DefaultTheme,
   enhanceApp({ app }) {
-    const before_s_div = document.getElementById("gitalk-page-container") // 获取页面评论组件DOM节点
+    if (typeof window !== undefined) {
+      const before_s_div = document.getElementById("gitalk-page-container") // 获取页面评论组件DOM节点
       if (before_s_div) {
         document.body.removeChild(before_s_div)
       }
@@ -24,5 +25,6 @@ export default {
         createIssueManually: false, //如果当前页面没有相应的 isssue 且登录的用户属于 admin，则会自动创建 issue。如果设置为 true，则显示一个初始化页面，创建 issue 需要点击 init 按钮。
       });
       gitment.render("gitalk-page-container");
+    }
   }
 } satisfies Theme
